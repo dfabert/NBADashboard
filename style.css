@@ -1,0 +1,103 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: rgb(139, 158, 173);
+}
+
+header {
+	margin-bottom: 2em;
+	padding-top: 2em;
+    text-align: center;
+    /* border: 1px solid red; */
+}
+
+.responsive {
+    width: 100%;
+    height: auto;
+}
+
+div {
+    width: 150px;
+    padding: 50px;
+    margin: 20px;
+    /* border: 1px solid red; */
+
+}
+
+
+        #left,
+        #middle,
+        #right,{
+            display: inline-block;
+            *display: inline;
+            zoom: 1;
+            vertical-align: top;
+            font-size: 12px;
+            padding: 1em;
+            height: 200px;
+            text-align: left;
+        }
+
+        #left {
+            width: 25%;
+            text-align: justify;
+        }
+
+        #middle {
+            width: 25%;
+        }
+
+        #right {
+            width: 25%;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        #left,
+        #middle,
+        #right {
+            display: inline-block;
+            *display: inline;
+            zoom: 1;
+            vertical-align: top;
+            font-size: 12px;
+            -moz-box-shadow: inset 0 0 10px #777777;
+            -webkit-box-shadow: inset 0 0 10px #777777;
+            box-shadow: inset 0 0 10px #777777;
+            background-color: rgb(240, 237, 231);
+            text-align: left;
+            height: 250px;
+            padding: 2em;
+
+        }
+
+        #left {
+            width: 25%;
+        }
+
+        #middle {
+            width: 25%;
+        }
+
+        #right {
+            width: 25%;
+        }
+        
+        footer {
+            /* border: 1px solid red; */
+            margin: 2em;
+            width: auto;
+            height: 50px;
+            padding: 1em;
+            -moz-box-shadow: inset 0 0 10px #777777;
+            -webkit-box-shadow: inset 0 0 10px #777777;
+            box-shadow: inset 0 0 10px #777777;
+            background-color: rgb(240, 237, 231);
+        }
+
