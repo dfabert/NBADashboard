@@ -97,7 +97,7 @@ $.ajax({
      }).then(function(response) {
 
         for (var i = 0; i < response.teams.length; i++){
-            console.log(response.teams[i].strTeam);
+            console.log(response);
 
             var team = response.teams[i].strTeam;
             var teamCard = $('<div>');
