@@ -16,7 +16,6 @@
 
 //scoresURL is for the last 15 games
 var scoresURL = "https://www.thesportsdb.com/api/v1/json/1/eventspastleague.php?id=4387"
-console.log(scoresURL);
 
 $.ajax({
      url: scoresURL,
@@ -55,7 +54,6 @@ $.ajax({
 
   //Games is for the next 15 events
   var gamesURL = "https://www.thesportsdb.com/api/v1/json/1/eventsnextleague.php?id=4387"
-  console.log(gamesURL);
   
   $.ajax({
        url: gamesURL,
@@ -92,7 +90,6 @@ $.ajax({
 
     //Getting the teams
     var gamesURL = "https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php?id=4387"
-  console.log(gamesURL);
   
   $.ajax({
        url: gamesURL,
@@ -108,9 +105,5 @@ $.ajax({
             $(teamCard).append(team);
             $('#teams').append(teamCard);            
         }
-        
-
-                
-
      })
 
