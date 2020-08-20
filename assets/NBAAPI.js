@@ -89,25 +89,40 @@ $.ajax({
 
 
     //Getting the teams
-    var gamesURL = "https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php?id=4387"
+//     var gamesURL = "https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php?id=4387"
   
-  $.ajax({
-       url: gamesURL,
-       method: "GET"
-     }).then(function(response) {
+//   $.ajax({
+//        url: gamesURL,
+//        method: "GET"
+//      }).then(function(response) {
 
-        console.log(response);
+//         console.log(response);
 
-        for (var i = 0; i < response.teams.length; i++){
-            var team = response.teams[i].strTeam;
-            var teamCard = $('<div>');
-            teamCard.addClass('card');
-            $(teamCard).append(team);
-            $('#left').append(teamCard);            
-        }
-        
+//         for (var i = 0; i < response.teams.length; i++){
+//             var team = response.teams[i].strTeam;
+//             var teamCard = $('<div>');
+//             teamCard.addClass('card');
+//             $(teamCard).append(team);
+//             $('#left').append(teamCard);            
+//         }
+//      })
 
-                
 
-     })
+    var standingsURL = "https://www.thesportsdb.com/api/v1/json/1/lookuptable.php?l=4387&s=2019-2020";
+  
+    $.ajax({
+         url: standingsURL,
+         method: "GET"
+       }).then(function(response) {
+  
+          console.log(response);
+  
+          for (var i = 0; i < response.teams.length; i++){
+              var team = response.teams[i].strTeam;
+              var teamCard = $('<div>');
+              teamCard.addClass('card');
+              $(teamCard).append(team);
+              $('#left').append(teamCard);            
+          }
+       })
 
