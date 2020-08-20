@@ -16,7 +16,6 @@
 
 //scoresURL is for the last 15 games
 var scoresURL = "https://www.thesportsdb.com/api/v1/json/1/eventspastleague.php?id=4387"
-console.log(scoresURL);
 
 $.ajax({
      url: scoresURL,
@@ -47,7 +46,7 @@ $.ajax({
         $(scoreCard).append(visitor);
         $(scoreCard).append(home);
 
-        $('#scores').append(scoreCard);   //Using Scores for the last 15 games
+        $('#middle').append(scoreCard);   //Using Scores for the last 15 games
      }    
 
   });
@@ -55,7 +54,6 @@ $.ajax({
 
   //Games is for the next 15 events
   var gamesURL = "https://www.thesportsdb.com/api/v1/json/1/eventsnextleague.php?id=4387"
-  console.log(gamesURL);
   
   $.ajax({
        url: gamesURL,
@@ -84,7 +82,7 @@ $.ajax({
           $(scoreCard).append(visitor);
           $(scoreCard).append(home);
   
-          $('#games').append(scoreCard);   //Using Scores for the last 15 games
+          $('#right').append(scoreCard);   //Using Scores for the last 15 games
        }    
   
     });
@@ -92,21 +90,20 @@ $.ajax({
 
     //Getting the teams
     var gamesURL = "https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php?id=4387"
-  console.log(gamesURL);
   
   $.ajax({
        url: gamesURL,
        method: "GET"
      }).then(function(response) {
 
-        for (var i = 0; i < response.teams.length; i++){
-            console.log(response.teams[i].strTeam);
+        console.log(response);
 
+        for (var i = 0; i < response.teams.length; i++){
             var team = response.teams[i].strTeam;
             var teamCard = $('<div>');
             teamCard.addClass('card');
             $(teamCard).append(team);
-            $('#teams').append(teamCard);            
+            $('#left').append(teamCard);            
         }
         
 
