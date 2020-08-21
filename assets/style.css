@@ -16,12 +16,15 @@
 }
 
 h2 {
-    width: 50%;
+    
     float: left;
+    margin: 0px; 
+    font-size: 45px;
 }
 
 h4 {
    text-align: right;
+   margin: 8px;
 }
 
 header {
@@ -35,5 +38,10 @@ header {
 
 .icon {
     width: 35px;
-    padding: 2px;
+    padding: 4px;
+}
+
+textarea {
+    resize: none;
+    
 }
