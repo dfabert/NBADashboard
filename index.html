@@ -14,16 +14,29 @@
     <header>
         <h2>NBA Update</h2>
         <h4>Jump To Odds</h4>
-        <h4>Search For Team
-            <textarea rows='1'></textarea>
-        </h4>
+        <h4>
+            <div class="dropdown">  <!--w3 schools framework-->
+                <button class="dropbtn">Customize with Your Team!</button>
+                <div class="dropdown-content">
+                  <a href="https://www.google.com">Link 1</a>
+                  <a href="#">Link 2</a>
+                  <a href="#">Link 3</a>
+                </div>
+            </div>
+        </h4> 
         <div id = 'teamLinks'></div>
     </header>
 
     <div class = 'container-main'>
-        <div id="records">League Standings</div>
-        <div id="scores">Today's Info</div>
-        <div id="games">Tomorrow</div>
+        <div id="records">
+            <h5>League Standings</h5>
+        </div>
+        <div id="scores">
+            <h5>Scores</h5>
+        </div>
+        <div id="games">
+            <h5>Upcoming Games</h5>
+        </div>
     </div>
 
     <div class = 'container' id='betting'>
@@ -35,8 +48,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="assets/NBAAPI.js"></script>
     
-
-
 </body>
 
 </html>

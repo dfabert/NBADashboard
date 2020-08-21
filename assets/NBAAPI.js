@@ -88,13 +88,13 @@ $.ajax({
     });
 
 
-    //Getting the teams
+    //Getting the teams' links
      var gamesURL = "https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php?id=4387"
   
-  $.ajax({
-       url: gamesURL,
-       method: "GET"
-     }).then(function(response) {
+        $.ajax({
+            url: gamesURL,
+            method: "GET"
+            }).then(function(response) {
 
         for (var i = 0; i < response.teams.length; i++){
             var team = response.teams[i].strTeam;
@@ -102,7 +102,6 @@ $.ajax({
             var teamIcon = $('<img>');
             var teamLink = response.teams[i].strWebsite;
             var teamLink = 'https://' + teamLink;
-            console.log(teamLink);
             var link = $('<a>');
 
             teamIcon.addClass('icon');
