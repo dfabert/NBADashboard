@@ -8,38 +8,27 @@
 
     <title>NBA Daily</title>
 
-
 </head>
 
 <body>
     <header>
-        <img src="/Users/jenniferbuck/Desktop/BB/BBFirstProjectNBA/NBA Image.jpg" alt="NBA Pic" class="responsive">
-        <br>
-        <br>
-        <h2>NBA Daily</h2>
-        <time datetime="2020-08-15">Today</time>
+        <h2>NBA Update</h2>
+        <h4>Jump To Odds</h4>
+        <h4>Search For Team</h4>
+        <div id = 'teamLinks'></div>
     </header>
 
-    <div id="teams" class="responsive">Top 10
-        <ol>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ol>
-    </div>
-    <div id="scores" class="responsive">Today's Info</div>
-    <div id="games" class="responsive">Tomorrow</div>
-
+    <div class = 'container-main'>
+        <div id="records">League Standings</div>
+        <div id="scores">Today's Info</div>
+        <div id="games">Tomorrow</div>
     </div>
 
-    <footer>Betting</footer>
+    <div class = 'container' id='betting'>
+        Betting
+    </div>    
+
+    <footer></footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="assets/NBAAPI.js"></script>

@@ -46,7 +46,7 @@ $.ajax({
         $(scoreCard).append(visitor);
         $(scoreCard).append(home);
 
-        $('#middle').append(scoreCard);   //Using Scores for the last 15 games
+        $('#scores').append(scoreCard);   //Using Scores for the last 15 games
      }    
 
   });
@@ -72,40 +72,50 @@ $.ajax({
           scoreCard.addClass('card');
           //visitor line
           var visitor = $('<div>')
-          visitor.addClass('visitor');
+          //visitor.addClass('visitor');
           visitor.text(visTeam);
           //hometeam line
           var home = $('<div>')
-          home.addClass('visitor');
+          //home.addClass('home');
           home.text(homeTeam+ '       ' + tipTime);
   
           $(scoreCard).append(visitor);
           $(scoreCard).append(home);
   
-          $('#right').append(scoreCard);   //Using Scores for the last 15 games
+          $('#games').append(scoreCard);   //Using Scores for the last 15 games
        }    
   
     });
 
 
     //Getting the teams
-//     var gamesURL = "https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php?id=4387"
+     var gamesURL = "https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php?id=4387"
   
-//   $.ajax({
-//        url: gamesURL,
-//        method: "GET"
-//      }).then(function(response) {
+  $.ajax({
+       url: gamesURL,
+       method: "GET"
+     }).then(function(response) {
 
-//         console.log(response);
+        for (var i = 0; i < response.teams.length; i++){
+            var team = response.teams[i].strTeam;
+            var teamLogo = response.teams[i].strTeamBadge;
+            var teamIcon = $('<img>');
+            var teamLink = response.teams[i].strWebsite;
+            var teamLink = 'https://' + teamLink;
+            console.log(teamLink);
+            var link = $('<a>');
 
-//         for (var i = 0; i < response.teams.length; i++){
-//             var team = response.teams[i].strTeam;
-//             var teamCard = $('<div>');
-//             teamCard.addClass('card');
-//             $(teamCard).append(team);
-//             $('#left').append(teamCard);            
-//         }
-//      })
+            teamIcon.addClass('icon');
+            teamIcon.attr('src', teamLogo);
+
+            link.attr('href', teamLink);
+            link.attr('target', '_blank');
+
+            $(link).append(teamIcon);
+
+            $('#teamLinks').append(link);            
+        }
+     })
 
 
     var standingsURL = "https://www.thesportsdb.com/api/v1/json/1/lookuptable.php?l=4387&s=2019-2020";
@@ -115,14 +125,16 @@ $.ajax({
          method: "GET"
        }).then(function(response) {
   
-          console.log(response);
-  
-          for (var i = 0; i < response.teams.length; i++){
-              var team = response.teams[i].strTeam;
-              var teamCard = $('<div>');
-              teamCard.addClass('card');
-              $(teamCard).append(team);
-              $('#left').append(teamCard);            
-          }
-       })
+          for (var i = 0; i < response.table.length; i++){
+              var team = response.table[i].name;
+              var wins = response.table[i].win;
+              var loss = response.table[i].loss;
 
+              var recordCard = $('<div>');
+              recordCard.addClass('card');
+              $(recordCard).append(team + ' ' + wins + ' ' + loss)
+              $('#records').append(recordCard);
+
+
+            }
+        })
