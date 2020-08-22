@@ -1,8 +1,7 @@
-body {
+.background {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-
 }
 
 .container-main{
@@ -12,14 +11,8 @@ body {
     justify-content: center;
     background-color: whitesmoke;
     background-color: rgba(255, 255, 255, 0);
+    
   }
-
-.container-mainTakeOver{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-}
 
 .card {
     background-color: white;  
@@ -65,10 +58,8 @@ h5 {
 header {
     background-color: black;
     color: white;
-}
-
-.headerTakeOver {
-    background-color: rgba(255, 255, 255, 0);
+    width: 100%;
+    position: fixed;
 }
 
 #teamLinks {
@@ -121,4 +112,3 @@ textarea {
   .dropdown-content a:hover {background-color: #ddd}
   
   .show {display:block;}
-

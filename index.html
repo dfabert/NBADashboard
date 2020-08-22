@@ -11,39 +11,43 @@
 </head>
 
 <body>
-    <header>
-        <h2>NBA Update</h2>
-        <h4><a href="#betting">Jump To Odds</a></h4>
-        <h4>
-            <div class="dropdown">
-                <button onclick="dropDown()" class="dropbtn">Select Your Team</button>
-                <div id="dropdown" class="dropdown-content">
-                   <!--Teams go here for dropdown-->
+    <div class = 'background'>
+        <header>
+            <h2>NBA Update</h2>
+            <h4><a href="#betting">Jump To Odds</a></h4>
+            <h4>
+                <div class="dropdown">
+                    <button onclick="dropDown()" class="dropbtn">Select Your Team</button>
+                    <div id="dropdown" class="dropdown-content">
+                    <!--Teams go here for dropdown-->
+                    </div>
                 </div>
-              </div>
-        </h4> 
-        <div id = 'teamLinks'></div>
-    </header>
+            </h4>
+            <div id = 'teamLinks'></div>
+        </header>
 
-    <div class = 'container-main'>
-        <div>
-            <h5>League Standings</h5>
-            <table id="records"></table>
+        <div style="height: 155px;"></div>
+
+    
+        <div class ='container-main'>
+            <div>
+                <h5>League Standings</h5>
+                <table id="records"></table>
+            </div>
+            <div id="scores">
+                <h5>Scores</h5>
+            </div>
+            <div id="games">
+                <h5>Upcoming Games</h5>
+            </div>    
         </div>
-        <div id="scores">
-            <h5>Scores</h5>
-        </div>
-        <div id="games">
-            <h5>Upcoming Games</h5>
+
+        <div class = 'container-main'>
+            <div id='betting'>
+                <h5>Today's Lines</h5>
+            </div>
         </div>    
     </div>
-
-    <div class = 'container-main'>
-        <div id='betting'>
-            <h5>Today's Lines</h5>
-        </div>
-    </div>    
-
     <footer></footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

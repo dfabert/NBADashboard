@@ -183,7 +183,7 @@ $.ajax({
             takeOverImage = (response.teams[0].strTeamFanart1);
             takeOverBG = $('<img>')
             takeOverBG.attr('src', takeOverImage);
-            $('body').attr('style', "background-image: url('"+ takeOverImage + "');");
+            $('.background').attr('style', "background-image: url('"+ takeOverImage + "');");
             $('header').attr('class', 'headerTakeOver');
             $('h5').attr('class', 'card');
 
