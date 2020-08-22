@@ -88,16 +88,19 @@ $.ajax({
     });
 
 
-    //Getting the teams' links
-     var gamesURL = "https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php?id=4387"
+    //Getting the teams' links for header and dropdown
+     var teamsURL = "https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php?id=4387"
+
+     
   
         $.ajax({
-            url: gamesURL,
+            url: teamsURL,
             method: "GET"
             }).then(function(response) {
 
         for (var i = 0; i < response.teams.length; i++){
             var team = response.teams[i].strTeam;
+            var teamID = response.teams[i].idTeam;
             var teamLogo = response.teams[i].strTeamBadge;
             var teamIcon = $('<img>');
             var teamLink = response.teams[i].strWebsite;
@@ -112,7 +115,12 @@ $.ajax({
 
             $(link).append(teamIcon);
 
-            $('#teamLinks').append(link);            
+            $('#teamLinks').append(link);      
+            
+            var dropTeam = $('<div>')
+            dropTeam.append(team);
+            dropTeam.attr('onclick', 'teamTakeover(' + teamID + ')');
+            $('#dropdown').append(dropTeam);
         }
      })
 
@@ -137,3 +145,45 @@ $.ajax({
 
             }
         })
+
+        //function to listen for click on drop down
+        function dropDown() {
+            document.getElementById("dropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+                }
+            }
+            }
+        } 
+
+
+    function teamTakeover(teamID) {
+
+        var teamURL = 'https://www.thesportsdb.com/api/v1/json/1/lookupteam.php?id=' + teamID;
+
+        $.ajax({
+            url: teamURL,
+            method: 'GET'
+        }).then(function(response) {
+            console.log(response);
+            takeOverTeam = (response.teams[0].strTeam);
+            takeOverImage = (response.teams[0].strTeamFanart1);
+            takeOverBG = $('<img>')
+            takeOverBG.attr('src', takeOverImage);
+            $('body').attr('style', "background-image: url('"+ takeOverImage + "');");
+            $('header').attr('class', 'headerTakeOver');
+
+
+            
+        })
+
+    }

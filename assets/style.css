@@ -1,10 +1,25 @@
+body {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
 .container-main{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     background-color: whitesmoke;
+    background-color: rgba(255, 255, 255, 0);
   }
+
+.container-mainTakeOver{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 
 .card {
     background-color: white;  
@@ -15,7 +30,6 @@
 }
 
 h2 {
-    
     float: left;
     margin: 0px; 
     font-size: 45px;
@@ -31,7 +45,13 @@ header {
     color: white;
 }
 
+
+.headerTakeOver {
+    background-color: rgba(255, 255, 255, 0);
+}
+
 #teamLinks {
+    clear: both;
     text-align: center;
 }
 
@@ -50,14 +70,16 @@ h5 {
 }
 
 .dropbtn {
-    background-color: darkgrey;
-    border: 0;
-    font-family: sans-serif;
-    font-style: italic;
+    background-color: #3498DB;
     color: white;
+    padding: 4px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
   }
   
   .dropdown {
+    float: right;
     position: relative;
     display: inline-block;
   }
@@ -67,13 +89,20 @@ h5 {
     position: absolute;
     background-color: #f1f1f1;
     min-width: 160px;
+    overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    right: 0;
     z-index: 1;
   }
   
-  .dropdown-content a {
+  .dropdown-content div {
     color: black;
-    padding: 12px 16px;
+    padding: 4px 4px;
     text-decoration: none;
     display: block;
   }
+
+  .dropdown-content a:hover {background-color: #ddd}
+  
+  .show {display:block;}
+
