@@ -24,13 +24,26 @@ body {
 .card {
     background-color: white;  
     border-radius: 5px;
-    padding: 3px;
+    padding: 8px;
     margin: 5px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
 .bettingCard {
     float: left;
+}
+
+table{
+    background-color: white;  
+    border-radius: 5px;
+    margin: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+td{
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
 h2 {

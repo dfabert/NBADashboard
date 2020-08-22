@@ -136,12 +136,15 @@ $.ajax({
               var wins = response.table[i].win;
               var loss = response.table[i].loss;
 
-              var recordCard = $('<div>');
-              recordCard.addClass('card');
-              $(recordCard).append(team + ' ' + wins + ' ' + loss)
+              var recordArray = [team, wins, loss];
+              var recordCard = $('<tr>');
+
+              for (var j = 0; j < recordArray.length; j++){
+                var newCell = $('<td>');
+                $(newCell).append(recordArray[j]);
+                $(recordCard).append(newCell);
+              }
               $('#records').append(recordCard);
-
-
             }
         })
 
@@ -176,7 +179,6 @@ $.ajax({
             url: teamURL,
             method: 'GET'
         }).then(function(response) {
-            console.log(response);
             takeOverTeam = (response.teams[0].strTeam);
             takeOverImage = (response.teams[0].strTeamFanart1);
             takeOverBG = $('<img>')
