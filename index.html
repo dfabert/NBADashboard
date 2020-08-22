@@ -13,7 +13,7 @@
 <body>
     <header>
         <h2>NBA Update</h2>
-        <h4>Jump To Odds</h4>
+        <h4><a href="#betting">Jump To Odds</a></h4>
         <h4>
             <div class="dropdown">
                 <button onclick="dropDown()" class="dropbtn">Select Your Team</button>
@@ -34,17 +34,20 @@
         </div>
         <div id="games">
             <h5>Upcoming Games</h5>
-        </div>
+        </div>    
     </div>
 
-    <div class = 'container' id='betting'>
-        Betting
+    <div class = 'container-main'>
+        <div id='betting'>
+            <h5>Today's Lines</h5>
+        </div>
     </div>    
 
     <footer></footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="assets/NBAAPI.js"></script>
+    <!--<script src="assets/Odds.js"></script> Turning off this script so we don't keep requesting from the API!-->
     
 </body>
 

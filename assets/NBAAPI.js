@@ -92,7 +92,6 @@ $.ajax({
      var teamsURL = "https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php?id=4387"
 
      
-  
         $.ajax({
             url: teamsURL,
             method: "GET"
@@ -166,6 +165,9 @@ $.ajax({
         } 
 
 
+
+        //When user selects favorite team from dropdown menu
+
     function teamTakeover(teamID) {
 
         var teamURL = 'https://www.thesportsdb.com/api/v1/json/1/lookupteam.php?id=' + teamID;
@@ -181,9 +183,17 @@ $.ajax({
             takeOverBG.attr('src', takeOverImage);
             $('body').attr('style', "background-image: url('"+ takeOverImage + "');");
             $('header').attr('class', 'headerTakeOver');
+            $('h5').attr('class', 'card');
 
-
-            
+            localStorage.setItem('favTeam', teamID);
         })
-
     }
+
+    $(document).ready(function(){
+        var teamID = localStorage.getItem('favTeam');
+
+        if(teamID != null)
+            {
+               teamTakeover(teamID); 
+            }
+    })

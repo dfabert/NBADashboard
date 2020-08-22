@@ -29,6 +29,10 @@ body {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
+.bettingCard {
+    float: left;
+}
+
 h2 {
     float: left;
     margin: 0px; 
@@ -40,11 +44,15 @@ h4 {
    margin: 8px;
 }
 
+h5 {
+    text-align: center;
+    margin: 4px;
+}
+
 header {
     background-color: black;
     color: white;
 }
-
 
 .headerTakeOver {
     background-color: rgba(255, 255, 255, 0);
@@ -62,11 +70,6 @@ header {
 
 textarea {
     resize: none;   
-}
-
-h5 {
-    text-align: center;
-    margin: 4px;
 }
 
 .dropbtn {
