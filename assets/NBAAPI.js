@@ -57,7 +57,7 @@ $.ajax({
         var homeScore = $('<div>');
         homeScore.text(hScore);
         homeScore.addClass('score');
-        $(home).append(homeTeam);
+        $(home).append(homeTeam); 
         $(home).append(homeScore);
 
         $(scoreCard).append(visitor);
