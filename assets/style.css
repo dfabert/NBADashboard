@@ -11,7 +11,6 @@
     justify-content: center;
     background-color: whitesmoke;
     background-color: rgba(255, 255, 255, 0);
-    
   }
 
 .card {
@@ -53,13 +52,14 @@ h4 {
 h5 {
     text-align: center;
     margin: 4px;
+    font-size: 19px;
 }
 
 header {
     background-color: black;
     color: white;
     width: 100%;
-    position: fixed;
+    /* position: fixed; */
 }
 
 #teamLinks {
@@ -109,6 +109,19 @@ textarea {
     display: block;
   }
 
-  .dropdown-content a:hover {background-color: #ddd}
+  .dropdown-content a:hover {
+      background-color: #ddd;
+    }
   
-  .show {display:block;}
+  .show {
+      display:block;
+  }
+
+  .scoreLine {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+ 

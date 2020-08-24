@@ -23,25 +23,42 @@ $.ajax({
    }).then(function(response) {
     for (var i = 0; i < response.events.length; i++){
     //Pull Visiting Team Information
-        var visTeam = response.events[i].strAwayTeam;
-        var visScore = response.events[i].intAwayScore;
+        var vTeam = response.events[i].strAwayTeam;
+        var vScore = response.events[i].intAwayScore;
     //Pull Home Team Information
-        var homeTeam = response.events[i].strHomeTeam;
-        var homeScore = response.events[i].intHomeScore;
+        var hTeam = response.events[i].strHomeTeam;
+        var hScore = response.events[i].intHomeScore;
+
     //Status or quater of the game
     //    var status = response.data[i].status;
 
     //create card for the score
         var scoreCard = $('<div>');
         scoreCard.addClass('card');
+
         //visitor line
-        var visitor = $('<div>')
-        visitor.addClass('visitor');
-        visitor.text(visTeam+ ' ' + visScore);
+        var visitor = $('<div>');
+        visitor.addClass('scoreLine');
+        var visitorTeam = $('<div>');
+        visitorTeam.text(vTeam);
+        visitorTeam.addClass('team');
+        var visitorScore = $('<div>');
+        visitorScore.text(vScore);
+        visitorScore.addClass('score');
+        $(visitor).append(visitorTeam);
+        $(visitor).append(visitorScore);
+        
         //hometeam line
-        var home = $('<div>')
-        home.addClass('visitor');
-        home.text(homeTeam+ ' ' + homeScore);
+        var home = $('<div>');
+        home.addClass('scoreLine');
+        var homeTeam = $('<div>');
+        homeTeam.text(hTeam);
+        homeTeam.addClass('team');
+        var homeScore = $('<div>');
+        homeScore.text(hScore);
+        homeScore.addClass('score');
+        $(home).append(homeTeam);
+        $(home).append(homeScore);
 
         $(scoreCard).append(visitor);
         $(scoreCard).append(home);
@@ -54,30 +71,66 @@ $.ajax({
 
   //Games is for the next 15 events
   var gamesURL = "https://www.thesportsdb.com/api/v1/json/1/eventsnextleague.php?id=4387"
+                    
   
   $.ajax({
        url: gamesURL,
        method: "GET"
      }).then(function(response) {
+
+        console.log(response);
+
       for (var i = 0; i < response.events.length; i++){
       //Pull Visiting Team Information
-          var visTeam = response.events[i].strAwayTeam;
+          var vTeam = response.events[i].strAwayTeam;
       //Pull Home Team Information
-          var homeTeam = response.events[i].strHomeTeam;
-      //Status or quater of the game
-          var tipTime = response.events[i].strTime;
+          var hTeam = response.events[i].strHomeTeam;
+      //Time of the game (Local is Eastern Time)
+          var tipTime = response.events[i].strTimeLocal;
+
+          console.log(tipTime);
+
+          tipTime = tipTime.split(':');
+          tipTime.pop();
+            if(tipTime[0] > 12){
+                tipTime[0] = tipTime[0]-12;
+                tipTime[2] = 'PM';
+            }else{
+                tipTime[2] = 'AM';
+            }
+
+            tipTime = tipTime[0] + ':' + tipTime[1] + '  ' + tipTime[2];
+
+
+          console.log(tipTime);
+          
+
+
+
+      //create card for the score
+        var scoreCard = $('<div>');
+        scoreCard.addClass('card');
   
       //create card for the score
-          var scoreCard = $('<div>');
-          scoreCard.addClass('card');
-          //visitor line
-          var visitor = $('<div>')
-          //visitor.addClass('visitor');
-          visitor.text(visTeam);
-          //hometeam line
-          var home = $('<div>')
-          //home.addClass('home');
-          home.text(homeTeam+ '       ' + tipTime);
+        var visitor = $('<div>');
+        visitor.addClass('scoreLine');
+        var visitorTeam = $('<div>');
+        visitorTeam.text(vTeam);
+        visitorTeam.addClass('team');
+        $(visitor).append(visitorTeam);
+
+
+      //hometeam line
+         var home = $('<div>');
+         home.addClass('scoreLine');
+         var homeTeam = $('<div>');
+         homeTeam.text(hTeam);
+         homeTeam.addClass('team');
+         var time = $('<div>');
+         time.text(tipTime);
+         time.addClass('time');
+         $(home).append(homeTeam);
+         $(home).append(time);
   
           $(scoreCard).append(visitor);
           $(scoreCard).append(home);

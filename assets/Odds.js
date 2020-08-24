@@ -5,7 +5,6 @@ $.ajax({
     url: oddsURL,
     method: "GET"
   }).then(function(response) {
-    console.log(response);
     for (var i = 0; i < response.length; i++){
         var awayTeam = response[i].AwayTeam;
         var homeTeam = response[i].HomeTeam;
