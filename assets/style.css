@@ -11,7 +11,6 @@
     justify-content: center;
     background-color: whitesmoke;
     background-color: rgba(255, 255, 255, 0);
-    
   }
 
 .card {
@@ -20,6 +19,19 @@
     padding: 8px;
     margin: 5px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.favCard {
+    background-color: white;  
+    border-radius: 5px;
+    padding: 8px;
+    margin: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;   
 }
 
 .bettingCard {
@@ -53,13 +65,13 @@ h4 {
 h5 {
     text-align: center;
     margin: 4px;
+    font-size: 19px;
 }
 
 header {
     background-color: black;
     color: white;
     width: 100%;
-    position: fixed;
 }
 
 #teamLinks {
@@ -68,7 +80,7 @@ header {
 }
 
 .icon {
-    width: 35px;
+    width: 25px;
     padding: 4px;
 }
 
@@ -109,6 +121,28 @@ textarea {
     display: block;
   }
 
-  .dropdown-content a:hover {background-color: #ddd}
+  .dropdown-content a:hover {
+      background-color: #ddd;
+    }
   
-  .show {display:block;}
+  .show {
+      display:block;
+  }
+
+  .scoreLine {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .team {
+      padding-right: 12px;
+  }
+
+  .subheaderimages {
+    width: 50px;
+    padding: 20px;
+
+  }
+ 
