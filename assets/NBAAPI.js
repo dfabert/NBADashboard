@@ -1,20 +1,29 @@
 //Date Calculator that may be needed for other APIs
 
-// var todayFull = new Date();
-// var day = todayFull.getDate();
-//         if(month < 9){
-//             month = '0' + month;}
-// var month = todayFull.getMonth()+1;
-//         if(month < 9){ 
-//             month = '0' + month;}
-// var year = todayFull.getFullYear();
+var todayFull = new Date();
+var day = todayFull.getDate();
+        if(day <= 9){
+            day = '0' + day;}
+var month = todayFull.getMonth()+1;
+        if(month <= 9){ 
+            month = '0' + month;}
+var year = todayFull.getFullYear();
 
-// var todayShort = year + '-' + month + '-' + day;
+var todayShort = year + '-' + month + '-' + day;
 
-// console.log(todayShort);
+var yesterdayFull = new Date();
+yesterdayFull.setDate(yesterdayFull.getDate() - 1);
+var day = yesterdayFull.getDate();
+        if(day <= 9){
+            day = '0' + day;}
+var month = yesterdayFull.getMonth()+1;
+        if(month <= 9){ 
+            month = '0' + month;}
+var year = yesterdayFull.getFullYear();
 
+var yesterdayShort = year + '-' + month + '-' + day;
 
-//scoresURL is for the last 15 games
+//scoresURL is for the last 15 games, but we'll narrow it down to the last day's games.
 var scoresURL = "https://www.thesportsdb.com/api/v1/json/1/eventspastleague.php?id=4387"
 
 $.ajax({
@@ -22,15 +31,15 @@ $.ajax({
      method: "GET"
    }).then(function(response) {
     for (var i = 0; i < response.events.length; i++){
+
+        var gameDate = response.events[i].dateEventLocal;
+
     //Pull Visiting Team Information
         var vTeam = response.events[i].strAwayTeam;
         var vScore = response.events[i].intAwayScore;
     //Pull Home Team Information
         var hTeam = response.events[i].strHomeTeam;
         var hScore = response.events[i].intHomeScore;
-
-    //Status or quater of the game
-    //    var status = response.data[i].status;
 
     //create card for the score
         var scoreCard = $('<div>');
@@ -63,13 +72,18 @@ $.ajax({
         $(scoreCard).append(visitor);
         $(scoreCard).append(home);
 
-        $('#scores').append(scoreCard);   //Using Scores for the last 15 games
+        if(gameDate === yesterdayShort){
+            $('#scores').append(scoreCard);
+        }
+        else if(gameDate === todayShort){
+            $('games').append(scoreCard);
+        }
      }    
 
   });
 
 
-  //Games is for the next 15 events
+//Games is for today's games
   var gamesURL = "https://www.thesportsdb.com/api/v1/json/1/eventsnextleague.php?id=4387"
                     
   
@@ -78,73 +92,64 @@ $.ajax({
        method: "GET"
      }).then(function(response) {
 
-        console.log(response);
-
       for (var i = 0; i < response.events.length; i++){
-      //Pull Visiting Team Information
-          var vTeam = response.events[i].strAwayTeam;
-      //Pull Home Team Information
-          var hTeam = response.events[i].strHomeTeam;
-      //Time of the game (Local is Eastern Time)
-          var tipTime = response.events[i].strTimeLocal;
+            var gameDate = response.events[i].dateEventLocal;
+            if(gameDate === todayShort){
+                    //Pull Visiting Team Information
+                        var vTeam = response.events[i].strAwayTeam;
+                    //Pull Home Team Information
+                        var hTeam = response.events[i].strHomeTeam;
+                    //Time of the game (Local is Eastern Time)
+                        var tipTime = response.events[i].strTimeLocal;
 
-          console.log(tipTime);
+                        tipTime = tipTime.split(':');
+                        tipTime.pop();
+                            if(tipTime[0] > 12){
+                                tipTime[0] = tipTime[0]-12;
+                                tipTime[2] = 'PM';
+                            }else{
+                                tipTime[2] = 'AM';
+                            }
+                            tipTime = tipTime[0] + ':' + tipTime[1] + '  ' + tipTime[2];
+                        
+                    //create card for the score
+                        var scoreCard = $('<div>');
+                        scoreCard.addClass('card');
+                
+                    //create card for the score
+                        var visitor = $('<div>');
+                        visitor.addClass('scoreLine');
+                        var visitorTeam = $('<div>');
+                        visitorTeam.text(vTeam);
+                        visitorTeam.addClass('team');
+                        $(visitor).append(visitorTeam);
 
-          tipTime = tipTime.split(':');
-          tipTime.pop();
-            if(tipTime[0] > 12){
-                tipTime[0] = tipTime[0]-12;
-                tipTime[2] = 'PM';
-            }else{
-                tipTime[2] = 'AM';
+
+                    //hometeam line
+                        var home = $('<div>');
+                        home.addClass('scoreLine');
+                        var homeTeam = $('<div>');
+                        homeTeam.text(hTeam);
+                        homeTeam.addClass('team');
+                        var time = $('<div>');
+                        time.text(tipTime);
+                        time.addClass('time');
+                        $(home).append(homeTeam);
+                        $(home).append(time);
+                
+                        $(scoreCard).append(visitor);
+                        $(scoreCard).append(home);
+                
+                        $('#games').append(scoreCard);   //Using Scores for the last 15 games
             }
-
-            tipTime = tipTime[0] + ':' + tipTime[1] + '  ' + tipTime[2];
-
-
-          console.log(tipTime);
-          
-
-
-
-      //create card for the score
-        var scoreCard = $('<div>');
-        scoreCard.addClass('card');
-  
-      //create card for the score
-        var visitor = $('<div>');
-        visitor.addClass('scoreLine');
-        var visitorTeam = $('<div>');
-        visitorTeam.text(vTeam);
-        visitorTeam.addClass('team');
-        $(visitor).append(visitorTeam);
-
-
-      //hometeam line
-         var home = $('<div>');
-         home.addClass('scoreLine');
-         var homeTeam = $('<div>');
-         homeTeam.text(hTeam);
-         homeTeam.addClass('team');
-         var time = $('<div>');
-         time.text(tipTime);
-         time.addClass('time');
-         $(home).append(homeTeam);
-         $(home).append(time);
-  
-          $(scoreCard).append(visitor);
-          $(scoreCard).append(home);
-  
-          $('#games').append(scoreCard);   //Using Scores for the last 15 games
-       }    
+        }    
   
     });
 
 
-    //Getting the teams' links for header and dropdown
+//Getting the teams' links for header and dropdown
      var teamsURL = "https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php?id=4387"
 
-     
         $.ajax({
             url: teamsURL,
             method: "GET"
@@ -201,7 +206,7 @@ $.ajax({
             }
         })
 
-        //function to listen for click on drop down
+//function to listen for click on drop down
         function dropDown() {
             document.getElementById("dropdown").classList.toggle("show");
         }
@@ -211,39 +216,147 @@ $.ajax({
             if (!event.target.matches('.dropbtn')) {
             var dropdowns = document.getElementsByClassName("dropdown-content");
             var i;
-            for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                    }
                 }
-            }
             }
         } 
 
 
 
-        //When user selects favorite team from dropdown menu
+//When user selects favorite team from dropdown menu
 
     function teamTakeover(teamID) {
 
+        $('#favTeamSubHeader').empty();
         var teamURL = 'https://www.thesportsdb.com/api/v1/json/1/lookupteam.php?id=' + teamID;
+        localStorage.setItem('favTeam', teamID);
+
 
         $.ajax({
             url: teamURL,
             method: 'GET'
         }).then(function(response) {
-            takeOverTeam = (response.teams[0].strTeam);
-            takeOverImage = (response.teams[0].strTeamFanart1);
-            takeOverBG = $('<img>')
+            var takeOverTeam = response.teams[0].strTeam;
+            var takeOverImage = response.teams[0].strTeamFanart1;
+            var takeOverBadge = response.teams[0].strTeamBadge;
+            var takeOverJersey = response.teams[0].strTeamJersey;
+            var takeOverLogo = response.teams[0].strTeamLogo;
+
+            //Image for Background
+            takeOverBG = $('<img>');
             takeOverBG.attr('src', takeOverImage);
             $('.background').attr('style', "background-image: url('"+ takeOverImage + "');");
+
+            //Class changes for background
             $('header').attr('class', 'headerTakeOver');
             $('h5').attr('class', 'card');
 
-            localStorage.setItem('favTeam', teamID);
+            takeOverSubHeader = $('<div>');
+            takeOverSubHeader.addClass('favCard');
+            
+            takeOverBadgeImage = $('<img>');
+            takeOverBadgeImage.attr('src', takeOverBadge);
+            takeOverBadgeImage.addClass('subheaderimages');
+            takeOverBadgeImage.attr('id', 'badge')
+
+            takeOverJerseyImage = $('<img>');
+            takeOverJerseyImage.attr('src', takeOverJersey);
+            takeOverJerseyImage.addClass('subheaderimages');
+            takeOverJerseyImage.attr('id', 'jersey');
+
+            takeOverSubHeader.append(takeOverBadgeImage, takeOverJerseyImage);
+
+            $('#favTeamSubHeader').append(takeOverSubHeader);
         })
+
+        var lastFiveGamesURL = 'https://www.thesportsdb.com/api/v1/json/1/eventslast.php?id=' + teamID;
+
+        $.ajax({
+            url: lastFiveGamesURL,
+            method: 'GET'
+        }).then(function(response) {
+                    var dayPlayed = response.results[0].dateEventLocal;
+                    var video = response.results[0].strVideo;
+                //Pull Visiting Team Information
+                    var vTeam = response.results[0].strAwayTeam;
+                    var vScore = response.results[0].intAwayScore;
+                //Pull Home Team Information
+                    var hTeam = response.results[0].strHomeTeam;
+                    var hScore = response.results[0].intHomeScore;
+
+                    if(vScore = 'null'){
+                        console.log('going to penultimate game');
+                        var dayPlayed = response.results[1].dateEventLocal;
+                        var video = response.results[1].strVideo;
+                    //Pull Visiting Team Information
+                        var vTeam = response.results[1].strAwayTeam;
+                        var vScore = response.results[1].intAwayScore;
+                    //Pull Home Team Information
+                        var hTeam = response.results[1].strHomeTeam;
+                        var hScore = response.results[1].intHomeScore;
+                    }
+
+                    if(dayPlayed === todayShort){
+                        dayPlayed = 'Played Today';
+                    }
+                    else if(dayPlayed === yesterdayShort){
+                        dayPlayed = 'Played Yesterday';
+                    }
+                    else{
+                        dayPlayed = 'Played: ' + dayPlayed;
+                    }
+
+                //create card for the score
+                    var scoreCard = $('<div>');
+
+                //visitor line
+                    var visitor = $('<div>');
+                    visitor.addClass('scoreLine');
+                    var visitorTeam = $('<div>');
+                    visitorTeam.text(vTeam);
+                    visitorTeam.addClass('team');
+                    var visitorScore = $('<div>');
+                    visitorScore.text(vScore);
+                    visitorScore.addClass('score');
+                    $(visitor).append(visitorTeam);
+                    $(visitor).append(visitorScore);
+                    
+                //hometeam line
+                    var home = $('<div>');
+                    home.addClass('scoreLine');
+                    var homeTeam = $('<div>');
+                    homeTeam.text(hTeam);
+                    homeTeam.addClass('team');
+                    var homeScore = $('<div>');
+                    homeScore.text(hScore);
+                    homeScore.addClass('score');
+                    $(home).append(homeTeam); 
+                    $(home).append(homeScore);
+
+                //Date Played
+                    var played = $('<div>');
+                    played.text(dayPlayed);
+
+                //Highlight Link
+                    var link = $('<a>');
+                    link.text('Game Highlights');
+                    link.attr('href', video);
+                    link.attr('target', '_blank');
+
+                //Append to scorecard at top
+                    $(scoreCard).append(played,visitor, home, link);
+                    $('#badge').after(scoreCard);
+
+        })      
+
+
     }
 
+//Recalling favorite team from local storage
     $(document).ready(function(){
         var teamID = localStorage.getItem('favTeam');
 
