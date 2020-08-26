@@ -86,61 +86,71 @@ $.ajax({
 //Games is for today's games
   var gamesURL = "https://www.thesportsdb.com/api/v1/json/1/eventsnextleague.php?id=4387"
                     
-  
   $.ajax({
        url: gamesURL,
        method: "GET"
      }).then(function(response) {
 
-      for (var i = 0; i < response.events.length; i++){
-            var gameDate = response.events[i].dateEventLocal;
-            if(gameDate === todayShort){
-                    //Pull Visiting Team Information
-                        var vTeam = response.events[i].strAwayTeam;
-                    //Pull Home Team Information
-                        var hTeam = response.events[i].strHomeTeam;
-                    //Time of the game (Local is Eastern Time)
-                        var tipTime = response.events[i].strTimeLocal;
+        if(response.Object == null){
+            console.log('No More Games Tonight');
 
-                        tipTime = tipTime.split(':');
-                        tipTime.pop();
-                            if(tipTime[0] > 12){
-                                tipTime[0] = tipTime[0]-12;
-                                tipTime[2] = 'PM';
-                            }else{
-                                tipTime[2] = 'AM';
-                            }
-                            tipTime = tipTime[0] + ':' + tipTime[1] + '  ' + tipTime[2];
+            //create card for the text
+            var scoreCard = $('<div>');
+            scoreCard.addClass('card');
+            scoreCard.text('No More Games Tonight');
+            $('#games').append(scoreCard);
+
+        } else {
+                for (var i = 0; i < response.events.length; i++){
+                    var gameDate = response.events[i].dateEventLocal;
+                    if(gameDate === todayShort){
+                            //Pull Visiting Team Information
+                                var vTeam = response.events[i].strAwayTeam;
+                            //Pull Home Team Information
+                                var hTeam = response.events[i].strHomeTeam;
+                            //Time of the game (Local is Eastern Time)
+                                var tipTime = response.events[i].strTimeLocal;
+
+                                tipTime = tipTime.split(':');
+                                tipTime.pop();
+                                    if(tipTime[0] > 12){
+                                        tipTime[0] = tipTime[0]-12;
+                                        tipTime[2] = 'PM';
+                                    }else{
+                                        tipTime[2] = 'AM';
+                                    }
+                                    tipTime = tipTime[0] + ':' + tipTime[1] + '  ' + tipTime[2];
+                                
+                            //create card for the score
+                                var scoreCard = $('<div>');
+                                scoreCard.addClass('card');
                         
-                    //create card for the score
-                        var scoreCard = $('<div>');
-                        scoreCard.addClass('card');
-                
-                    //create card for the score
-                        var visitor = $('<div>');
-                        visitor.addClass('scoreLine');
-                        var visitorTeam = $('<div>');
-                        visitorTeam.text(vTeam);
-                        visitorTeam.addClass('team');
-                        $(visitor).append(visitorTeam);
+                            //create card for the score
+                                var visitor = $('<div>');
+                                visitor.addClass('scoreLine');
+                                var visitorTeam = $('<div>');
+                                visitorTeam.text(vTeam);
+                                visitorTeam.addClass('team');
+                                $(visitor).append(visitorTeam);
 
 
-                    //hometeam line
-                        var home = $('<div>');
-                        home.addClass('scoreLine');
-                        var homeTeam = $('<div>');
-                        homeTeam.text(hTeam);
-                        homeTeam.addClass('team');
-                        var time = $('<div>');
-                        time.text(tipTime);
-                        time.addClass('time');
-                        $(home).append(homeTeam);
-                        $(home).append(time);
-                
-                        $(scoreCard).append(visitor);
-                        $(scoreCard).append(home);
-                
-                        $('#games').append(scoreCard);   //Using Scores for the last 15 games
+                            //hometeam line
+                                var home = $('<div>');
+                                home.addClass('scoreLine');
+                                var homeTeam = $('<div>');
+                                homeTeam.text(hTeam);
+                                homeTeam.addClass('team');
+                                var time = $('<div>');
+                                time.text(tipTime);
+                                time.addClass('time');
+                                $(home).append(homeTeam);
+                                $(home).append(time);
+                        
+                                $(scoreCard).append(visitor);
+                                $(scoreCard).append(home);
+                        
+                                $('#games').append(scoreCard);   //Using Scores for the last 15 games
+                   } 
             }
         }    
   
@@ -172,7 +182,7 @@ $.ajax({
 
             $(link).append(teamIcon);
 
-            $('#teamLinks').append(link);      
+            $('#teamLinks, #teamLinksFooter').append(link);  
             
             var dropTeam = $('<div>')
             dropTeam.append(team);
@@ -288,7 +298,7 @@ $.ajax({
                     var hTeam = response.results[0].strHomeTeam;
                     var hScore = response.results[0].intHomeScore;
 
-                    if(vScore = 'null'){
+                    if(vScore == 'null'){
                         console.log('going to penultimate game');
                         var dayPlayed = response.results[1].dateEventLocal;
                         var video = response.results[1].strVideo;

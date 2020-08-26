@@ -1,5 +1,4 @@
 .background {
-    posit
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -62,6 +61,11 @@ h4 {
    text-align: right;
    margin: 8px;
 }
+@media screen and (max-width: 400px) {
+    h2 {
+        font-size: 2em;
+    }
+}
 
 h5 {
     text-align: center;
@@ -76,9 +80,28 @@ header {
     width: 100%;
 }
 
+footer {
+    background-color: black;
+    color: white;
+    width: 100%;
+    clear: both;
+    text-align: center;
+}
+
 #teamLinks {
     clear: both;
     text-align: center;
+}
+
+@media screen and (max-width: 515px) {
+    #teamLinks {
+        visibility: hidden;
+        height: 0px;
+    }
+
+    .favCard {
+        margin: 75px 5px 5px 5px;
+    }
 }
 
 .icon {
@@ -109,6 +132,7 @@ textarea {
     display: none;
     position: absolute;
     background-color: #f1f1f1;
+    max-height: 750px;
     min-width: 160px;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -145,7 +169,14 @@ textarea {
   .subheaderimages {
     width: 50px;
     padding: 20px;
-
   }
+
+  @media screen and (max-width: 400px) {
+        .subheaderimages {
+        width: 25px;
+        padding: 10px;
+      }
+  }
+
 
  
