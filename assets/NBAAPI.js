@@ -76,7 +76,7 @@ $.ajax({
             $('#scores').append(scoreCard);
         }
         else if(gameDate === todayShort){
-            $('games').append(scoreCard);
+            $('#games').append(scoreCard);
         }
      }    
 
@@ -373,5 +373,7 @@ $.ajax({
         if(teamID != null)
             {
                teamTakeover(teamID); 
+            }else{
+                teamTakeover(134880);  //Defaults to Atlanta Hawks
             }
     })
