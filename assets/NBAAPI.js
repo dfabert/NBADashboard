@@ -24,15 +24,15 @@ var year = yesterdayFull.getFullYear();
 var yesterdayShort = year + '-' + month + '-' + day;
 
 //scoresURL is for the last 15 games, but we'll narrow it down to the last day's games.
-var scoresURL = "https://www.thesportsdb.com/api/v1/json/1/eventspastleague.php?id=4387"
+var scoresURL = "https://www.thesportsdb.com/api/v1/json/1/eventspastleague.php?id=4387";
 
 $.ajax({
      url: scoresURL,
      method: "GET"
    }).then(function(response) {
-    for (var i = 0; i < response.events.length; i++){
 
-        var gameDate = response.events[i].dateEventLocal;
+    for (var i = 0; i < response.events.length; i++){
+        var gameDate = response.events[i].dateEvent;
 
     //Pull Visiting Team Information
         var vTeam = response.events[i].strAwayTeam;
@@ -84,14 +84,13 @@ $.ajax({
 
 
 //Games is for today's games
-  var gamesURL = "https://www.thesportsdb.com/api/v1/json/1/eventsnextleague.php?id=4387"
+  var gamesURL = "https://www.thesportsdb.com/api/v1/json/40130162/eventsnextleague.php?id=4387"
                     
   $.ajax({
        url: gamesURL,
        method: "GET"
      }).then(function(response) {
-
-        if(response.Object == null){
+        if(response == null){
             console.log('No More Games Tonight');
 
             //create card for the text
@@ -102,14 +101,14 @@ $.ajax({
 
         } else {
                 for (var i = 0; i < response.events.length; i++){
-                    var gameDate = response.events[i].dateEventLocal;
+                    var gameDate = response.events[i].dateEvent;
                     if(gameDate === todayShort){
                             //Pull Visiting Team Information
                                 var vTeam = response.events[i].strAwayTeam;
                             //Pull Home Team Information
                                 var hTeam = response.events[i].strHomeTeam;
                             //Time of the game (Local is Eastern Time)
-                                var tipTime = response.events[i].strTimeLocal;
+                                var tipTime = response.events[i].strTime;
 
                                 tipTime = tipTime.split(':');
                                 tipTime.pop();
@@ -148,7 +147,6 @@ $.ajax({
                         
                                 $(scoreCard).append(visitor);
                                 $(scoreCard).append(home);
-                        
                                 $('#games').append(scoreCard);   //Using Scores for the last 15 games
                    } 
             }
@@ -158,13 +156,12 @@ $.ajax({
 
 
 //Getting the teams' links for header and dropdown
-     var teamsURL = "https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php?id=4387"
+     var teamsURL = "https://www.thesportsdb.com/api/v1/json/40130162/lookup_all_teams.php?id=4387"
 
         $.ajax({
             url: teamsURL,
             method: "GET"
             }).then(function(response) {
-
         for (var i = 0; i < response.teams.length; i++){
             var team = response.teams[i].strTeam;
             var teamID = response.teams[i].idTeam;
@@ -192,13 +189,12 @@ $.ajax({
      })
 
 
-    var standingsURL = "https://www.thesportsdb.com/api/v1/json/1/lookuptable.php?l=4387&s=2019-2020";
-  
+    var standingsURL = "https://www.thesportsdb.com/api/v1/json/1/lookuptable.php?l=4387&s=2020-2021";
+     
     $.ajax({
          url: standingsURL,
          method: "GET"
        }).then(function(response) {
-  
           for (var i = 0; i < response.table.length; i++){
               var team = response.table[i].name;
               var wins = response.table[i].win;
