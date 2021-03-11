@@ -1,12 +1,40 @@
-# NBADashboard
 
-The NBA Dashboard is a way for the user to get all of the information on tonight's and last night's NBA Games.  Header allows the user to select thier favorite team or jump to the bottom of the page to show the odds for the upcoming games.  This will also display the most recent game played by the user's favorite team.  
+  
+  # NBA Dashboard
+ 
+  [![The MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  
 
-Below that is the scores, upcoming or today's games and the league standings.  
+  ## Table of Contents
+  * [Description of the Project](#Description-of-the-project)
+  * [Installation Guidelines](#Installation-Guidelines)
+  * [Usage Guidelines](#Usage-Guidelines)
+  * [Contributions](#Contributions)
+  * [License](#License)
+  * [Questions](#Questions)
 
+  ## Description of the Project
+  The NBA Dashboard is a way for the user to get the recent round of NBA scores as well as view the current standings of the league.  Furthermore, the header allows the user to select their favorite team.
 
-https://github.com/dfabert/NBADashboard
+  ## Installation Guidelines
+  No instalation guidelines noted
 
-https://dfabert.github.io/NBADashboard/index.html
+  ## Usage Guidelines
+  No usage guidelines noted
 
-![deployed image](assets/NBADB_Deployed.jpg)
+  ## Contributions
+  Created By Derick Fabert
+
+  ## License
+  This application is covered by the following license:  
+  The MIT License  
+  [Click here for more information](https://opensource.org/licenses/MIT)
+
+  ## Tests
+  No test guidelines noted
+
+  ## Questions
+  Github Repository: https://github.com/dfabert  
+  Any further questions, please e-mail me at:  df.webdev@gmail.com
+  
+  
