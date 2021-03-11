@@ -9,7 +9,7 @@ var month = todayFull.getMonth()+1;
             month = '0' + month;}
 var year = todayFull.getFullYear();
 
-var todayShort = year + '-' + month + '-' + day;
+var todayShort = year + month + day;
 
 var yesterdayFull = new Date();
 yesterdayFull.setDate(yesterdayFull.getDate() - 1);
@@ -78,24 +78,23 @@ $.ajax({
 
 
 //Games is for today's games
-  var gamesURL = "https://www.thesportsdb.com/api/v1/json/40130162/eventsnextleague.php?id=4387"
+  var gamesURL = "https://www.thesportsdb.com/api/v1/json/40130162/latestbasketball.php"
                     
   $.ajax({
        url: gamesURL,
        method: "GET"
      }).then(function(response) {
+        console.log(todayShort);
         if(response == null){
-            console.log('No More Games Tonight');
-
             //create card for the text
             var scoreCard = $('<div>');
             scoreCard.addClass('card');
-            scoreCard.text('No More Games Tonight');
+            scoreCard.text('No Games Scheduled Today');
             $('#games').append(scoreCard);
 
         } else {
-                for (var i = 0; i < response.events.length; i++){
-                    var gameDate = response.events[i].dateEvent;
+                for (var i = 0; i < response.games.length; i++){
+                    var gameDate = response.games[i].homeStartDate;
                     if(gameDate === todayShort){
                             //Pull Visiting Team Information
                                 var vTeam = response.events[i].strAwayTeam;
@@ -125,7 +124,6 @@ $.ajax({
                                 visitorTeam.text(vTeam);
                                 visitorTeam.addClass('team');
                                 $(visitor).append(visitorTeam);
-
 
                             //hometeam line
                                 var home = $('<div>');
