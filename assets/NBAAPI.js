@@ -23,7 +23,7 @@ var year = yesterdayFull.getFullYear();
 
 var yesterdayShort = year + '-' + month + '-' + day;
 
-//scoresURL is for the last 15 games, but we'll narrow it down to the last day's games.
+//scoresURL is for the last 15 games.
 var scoresURL = "https://www.thesportsdb.com/api/v1/json/1/eventspastleague.php?id=4387";
 
 $.ajax({
@@ -71,13 +71,7 @@ $.ajax({
 
         $(scoreCard).append(visitor);
         $(scoreCard).append(home);
-
-        if(gameDate === yesterdayShort){
-            $('#scores').append(scoreCard);
-        }
-        else if(gameDate === todayShort){
-            $('#games').append(scoreCard);
-        }
+        $('#scores').append(scoreCard);
      }    
 
   });
@@ -195,7 +189,6 @@ $.ajax({
          url: standingsURL,
          method: "GET"
        }).then(function(response) {
-           console.log(response);
           for (var i = 0; i < response.table.length; i++){
               var team = response.table[i].name;
               var wins = response.table[i].win;
