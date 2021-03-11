@@ -189,12 +189,13 @@ $.ajax({
      })
 
 
-    var standingsURL = "https://www.thesportsdb.com/api/v1/json/1/lookuptable.php?l=4387&s=2020-2021";
+    var standingsURL = "https://www.thesportsdb.com/api/v1/json/40130162/lookuptable.php?l=4387&s=2020-2021";
      
     $.ajax({
          url: standingsURL,
          method: "GET"
        }).then(function(response) {
+           console.log(response);
           for (var i = 0; i < response.table.length; i++){
               var team = response.table[i].name;
               var wins = response.table[i].win;
